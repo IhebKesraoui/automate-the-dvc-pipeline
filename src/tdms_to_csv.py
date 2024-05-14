@@ -19,8 +19,4 @@ for tdms_file in list_rglob:
     csv_file_path = Path(output_folder, tdms_file.stem+'.csv')
     tdms_df.to_csv(csv_file_path)
 
-<<<<<<< HEAD
-print('Finidzsffzfefeh\n')
-=======
-print('Finidxxsxszvsh\n')
->>>>>>> 26146d909a1de71416af897df006773963b54ab6
+print('Finidzsh\n')
