@@ -19,4 +19,4 @@ for tdms_file in list_rglob:
     csv_file_path = Path(output_folder, tdms_file.stem+'.csv')
     tdms_df.to_csv(csv_file_path)
 
-print('Finish\n')
+print('Finidzsh\n')
