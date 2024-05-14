@@ -16,7 +16,7 @@ jobs:
 
       - name: pull_stage
         run: |
-          dvc remote storage gdrive://1Hhuj49jL-EQk2XONdesnnXVpQmCz2phS
+          dvc remote add storage gdrive://1Hhuj49jL-EQk2XONdesnnXVpQmCz2phS
           dvc pull
 
       - name: prepro_stage
