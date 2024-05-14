@@ -2,3 +2,5 @@
     remote = storage
 ['remote "storage"']
     url = gdrive://1Hhuj49jL-EQk2XONdesnnXVpQmCz2phS
+['remote "out/logtrigger_2023_10_13_1.csv"']
+    url = ../out/LogTrigger_2023_10_13_4.csv

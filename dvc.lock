@@ -1,0 +1,30 @@
+schema: '2.0'
+stages:
+  test remote mini project:
+    cmd: python src/tdms_to_csv.py
+    deps:
+    - path: data/train
+      hash: md5
+      md5: e6d9e2599e26a4245aa16c4836b9331a.dir
+      size: 70872954
+      nfiles: 2
+    outs:
+    - path: out/path_list
+      hash: md5
+      md5: aa553ff2963fc43697086da426945055.dir
+      size: 0
+      nfiles: 1
+  transformation_en_csv:
+    cmd: python src/tdms_to_csv.py
+    deps:
+    - path: data/train
+      hash: md5
+      md5: e6d9e2599e26a4245aa16c4836b9331a.dir
+      size: 70872954
+      nfiles: 2
+    outs:
+    - path: out/path_list
+      hash: md5
+      md5: aa553ff2963fc43697086da426945055.dir
+      size: 0
+      nfiles: 1
