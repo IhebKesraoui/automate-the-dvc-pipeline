@@ -16,7 +16,8 @@ jobs:
 
       - name: pull_stage
         run: |
-          dvc pull
+          dvc repro
+          
 
       - name: prepro_stage
         run: |
