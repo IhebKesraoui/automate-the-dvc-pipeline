@@ -21,7 +21,7 @@ jobs:
 
       - name: Pull DVC data
         run: |
-          dvc pull data
+          dvc pull --debug data
 
       - name: Reproduce DVC pipeline
         run: |
