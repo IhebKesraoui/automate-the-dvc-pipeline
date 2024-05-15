@@ -1,19 +1,37 @@
-name: farmers
-on: [push]
+name: CML Run
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
-  run:
-    runs-on: [ubuntu-latest]
-    container: docker://dvcorg/cml-py3:latest
+  cml_run:
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
-      - name: cml_run
-        env:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
         run: |
-          pip install dvc
-          pip install --upgrade pip
           pip install -r requirements.txt
-          dvc pull
-          dvc repro 
-          
-          
+
+      - name: Pull DVC data
+        run: |
+          dvc pull data
+
+      - name: Reproduce DVC pipeline
+        run: |
+          dvc repro
+
+      - name: Fetch master branch
+        run: |
+          git fetch --prune origin +refs/heads/master:refs/remotes/origin/master
+
+      
