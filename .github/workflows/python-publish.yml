@@ -20,7 +20,11 @@ jobs:
           pip install -r requirements.txt
 
       - name: Pull DVC data
+            
+        env:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
         run: |
+        
           dvc remote list
           dvc pull data
 
