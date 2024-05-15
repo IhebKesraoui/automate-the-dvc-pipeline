@@ -1,24 +1,42 @@
-name: farmers
+name: CML & DVC
 on: [push]
 jobs:
-  run:
-    runs-on: [ubuntu-latest]
-    container: docker://dvcorg/cml-py3:latest
+  train-and-report:
+    runs-on: ubuntu-latest
+    # container: docker://ghcr.io/iterative/cml:0-dvc2-base1
     steps:
-      - uses: actions/checkout@v2
-      - name: cml_run
-        env:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - uses: iterative/setup-cml@v1
+      - uses: iterative/setup-dvc@v1
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
         run: |
-          pip install dvc
-          pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: pull_stage
+      - name: Pull DVC data
+        env:
+         GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
+     
         run: |
-          dvc repro
-          
+          dvc remote list
+          dvc pull data
 
-      - name: prepro_stage
+      - name: Reproduce DVC pipeline
         run: |
           dvc repro
+
+      - name: Fetch master branch
+        run: |
+          git fetch --prune origin +refs/heads/master:refs/remotes/origin/master
+
+      
